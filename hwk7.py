@@ -1,5 +1,5 @@
 from sortedcontainers import SortedDict
-
+#Life is good!!!!
 def print_menu():
     print('1. Print Users')
     print('2. Add a User')
