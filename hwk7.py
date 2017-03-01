@@ -1,10 +1,20 @@
+""""
+This program will ask the user to choose from a menu of 4 options to print, add,
+delete and look up users. The program will also contain a 5 option to quit the program
+at any given time.
+
+The program consists on a dictionary(key:value), while(Menu) and for loops
+It also consists on if, else and elif statements.
+
+"""""
 from sortedcontainers import SortedDict
-#Life is good!!!!
+
+
 def print_menu():
     print('1. Print Users')
     print('2. Add a User')
     print('3. Remove a User')
-    print('4. Lookup a Phone Number')
+    print('4. Lookup a User')
     print('5. Quit')
     print()
 
@@ -26,7 +36,11 @@ print_menu()
 # as long as the menu choice isn't "quit" get user options
 while menu_choice != 5:
     # get menu choice from user
-    menu_choice = int(input("Type in a number (1-5): "))
+    try:
+        menu_choice = int(input("Type in a number (1-5): "))
+
+    except:
+        print("***Please type Integer Numbers 1-5***")
 
     # view current entries
     if menu_choice == 1:
@@ -38,25 +52,38 @@ while menu_choice != 5:
     elif menu_choice == 2:
         print("Add User")
         name = input("Name: ")
-        username = input("User Name: ")
+        username = input("Username: ")
         usernames[name] = username
 
     # remove an entry
     elif menu_choice == 3:
+        # what do i do here?
         print("Remove User")
-        name = input("Name: ")
-        if name in usernames:
-            pass  # delete that entry
+        # get the name of the user they want to delete
+        input_name = input("Name: ")
+        # check if input name in dictionary
+        if input_name in usernames:
+            del usernames[input_name]
 
     # view user name
     elif menu_choice == 4:
         print("Lookup User")
-        name = input("Name: ")
+        name = input("Name or username: ")
         if name in usernames:
-            pass  # print the username
+            print(usernames[name])
         else:
-            pass  # print username not found
+            print("User not found.")
 
-    # is user enters something strange, show them the menu
-    elif menu_choice != 5:
+    elif menu_choice == 4:
+         print("Lookup User")
+         name = input("Name or username: ")
+         for key, value in usernames.items():
+             if (name == key):
+                 print(usernames[name])
+             if (name == value):
+                 print([item[0] for item in usernames.items() if item[1] == name])
+             else:
+                 print("User not found.")
+
+    else:
         print_menu()
